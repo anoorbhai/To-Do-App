@@ -63,14 +63,16 @@ h1 img{
 }
 
 .row{
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     background: lightgray;
     border-radius: 30px;
     padding-left: 20px;
     margin-bottom: 10px;
-    display: grid;
+    /* display: grid;
     grid-template-columns: auto auto auto;
-    overflow: auto;
+    overflow: auto; */
 }
 
 input{
@@ -82,13 +84,13 @@ input{
     font-weight: 14px
 }
 
-.row input.input-box{
+/* .row input.input-box{
     grid-column: 1;
 }
 
 .row input.due-date{
     grid-column: 2;
-}
+} */
 
 
 button{

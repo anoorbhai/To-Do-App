@@ -1,8 +1,7 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 const dueDate = document.getElementById("due-date");
-const modal = document.getElementById("alertModal");
-const closeModal = document.getElementById("close")[0];
+
 
 document.getElementById('theme-toggle').addEventListener('click', function() {
     var todoApp = document.querySelector('.todo-app');
@@ -14,9 +13,8 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
 });
 
 function addTask(boardNumber) {
-
     if (inputBox.value === '' || dueDate.value === '') {
-        // modal.style.display = 'block';
+        alert("Enter task and due date");
     }
     else {
         let li = document.createElement("li");
@@ -79,7 +77,6 @@ function deleteAllTasks() {
 function saveData() {
     localStorage.setItem("data", listContainer.innerHTML);
 }
-
 
 function showTask() {
     listContainer.innerHTML = localStorage.getItem(`data`);
