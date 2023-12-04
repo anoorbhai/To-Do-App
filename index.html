@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+
+        <header>
+            <h1>To-Do App <img src="images/icon.png"></h1>
+        </header>
+
+        <section class = "todo-app">
+            <header>
+                <h2 contenteditable="true" onblur="saveTitle(this)">Tasks</h2>
+            </header>
+            
+            <form class = "row">
+                <input type="text" id="input-box" placeholder="Add your text">
+                <input type="date" id="due-date" placeholder="Add due date">
+                <button onclick="addTask()">ADD</button>
+            </form>
+
+            <!-- <div id = "alertModal"class = "modal">
+                <div class = "modal-content">
+                    <span class="close">x</span>
+                    <p class = "modal-text">Please enter a Task</p>
+                </div>
+            </div> -->
+
+            <div class = "top-buttons-container">
+                <button class = "top-button" onclick="sortTasks()">SORT BY DUE DATE</button>
+            </div>
+
+            <ul id = 'list-container'>
+            </ul>
+
+            <div class = clear-button-container>
+                 <button class = "clear-button" onclick="deleteAllTasks()">CLEAR ALL</button>
+            </div>
+
+        </section>
+        
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider round"></span>
+        </label>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
