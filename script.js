@@ -34,7 +34,6 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
 
 function addTask() {
     if (inputBox.value === '' || dueDate.value === '') {
-        // alert("Enter task and due date");
         document.getElementById("alertModal").style.display = "block";
     }
     else {
@@ -69,7 +68,7 @@ function sortTasks() {
 
     tasks.forEach(task => listContainer.appendChild(task));
 
-    localStorage.setItem('data', listContainer.innerHTML)
+    saveData();
 }
 
 function saveTitle(titleElement) {
@@ -81,7 +80,7 @@ listContainer.addEventListener("click", function (e){
         e.target.classList.toggle("checked");
         saveData();
     }
-    else if (e.target.innerHTML === "\u00d7") {
+    else if (e.target.textContent === "\u00d7") {
         e.target.parentElement.remove();
         saveData();
     }
