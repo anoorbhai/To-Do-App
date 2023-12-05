@@ -2,172 +2,106 @@
     margin: 0;
     padding: 0;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    box-sizing: border-box;
 }
 
 .container{
-    width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(14,10,102,1) 0%, rgba(9,111,121,1) 65%, rgba(65,43,213,1) 100%);
+    background: linear-gradient(117.9deg, rgb(183, 248, 193) -3.5%, rgb(169, 212, 250) 53.8%, rgb(148, 231, 255) 100.4%);
     padding: 10px;
 }
 
-body {
-    background-color: white;
-    color: black;
+.container.dark-mode{
+    background: linear-gradient(135deg, rgba(14,10,102,1) 0%, rgba(9,111,121,1) 65%, rgba(65,43,213,1) 100%);
 }
 
 h1 {
-    font-size: 2em; /* 2 times the size of the normal text */
-    color: white; /* Use the color defined in :root */
-    text-align: center; /* Center the text */
-    margin-bottom: 20px; /* Add some space below the heading */
-    font-weight: bold; /* Make the text bold */
+    font-size: 2.5em; 
+    color: rgb(7, 7, 78); 
+    text-align: center; 
+    margin-bottom: 1em;
+    font-weight: bold; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
 }
 
-:root{
-    --text-colour: #002765;
+.dark-mode h1{
+    color: white;
 }
 
 .todo-app{
-    width: 100%;
-    max-width: 540px;
-    background: white;
-    color: var(--text-colour);
-    margin: 100px auto 20px;
-    padding: 40px 30px 70px;
-    border-radius: 10px;
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: darkblue;
+    border-radius:1em
 }
 
 .todo-app.dark-mode{
-    width: 100%;
-    max-width: 540px;
-    background: black;
+    background-color: black;
     color: white;
-    --text-color: white;
-    margin: 100px auto 20px;
-    padding: 40px 30px 70px;
-    border-radius: 10px;
 }
 
 .todo-app h2{
-    color: var(--text-color);
+    color: rgb(7, 7, 78); 
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 0.5em;
 }
 
-h1 img{
-    width: 50px;
-    margin-left: 5px;
+.todo-app.dark-mode h2{
+    color: white;
 }
 
 .row{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    overflow: auto;
     background: lightgray;
     border-radius: 30px;
-    padding-left: 20px;
-    margin-bottom: 10px;
-    /* display: grid;
-    grid-template-columns: auto auto auto;
-    overflow: auto; */
 }
 
 input{
-    flex: 1;
     border: none;
     outline: none;
     background: transparent;
-    padding: 10px;
-    font-weight: 14px
+    padding: 0.75em;
+    flex: 1;
 }
-
-/* .row input.input-box{
-    grid-column: 1;
-}
-
-.row input.due-date{
-    grid-column: 2;
-} */
-
 
 button{
     border: none;
     outline: none;
-    padding: 16px 50px;
+    padding: 0.5em;
     background: #ff5945;
     color: white;
-    font-size: 16px;
+    font-size: 1em;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 1.5em;
+    flex: 1;
 }
 
-.clear-button-container{
+ul{
+    text-align: left;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    background: transparent;
-    border-radius: 0 0 10px 10px;
-}
-
-.clear-button{
-    border: none;
-    outline: none;
-    padding: 16px 50px;
-    background: #ff5945;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 40px;
-}
-
-.top-button{
-    border: none;
-    outline: none;
-    padding: 10px 18px;
-    background: gray;
-    color: white;
-    font-size: 12px;
-    cursor: pointer;
-    border-radius: 8px;
-    margin-right: 5px;
-}
-
-.top-buttons-container{
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    height: 40px;
-    background: transparent;
-    border-radius: 0 0 10px 10px;
+    list-style-type: none;
+    flex-direction: column;
 }
 
 ul li{
-    list-style: none;
-    font-size: 17px;
-    padding: 12px 8px 12px 50px;
-    user-select: none;
-    cursor: pointer;
-    position: relative;
+    padding: 0.25em;
     display: grid;
-    grid-template-columns: 1fr 100px 50px;
-    overflow: auto;
+    grid-template-columns:0.1fr 1fr 1fr 0.2fr;
+    position: relative;
 }
 
 ul li::before{
     content: '';
-    position: absolute;
-    height: 28px;
-    width: 28px;
+    height: 1em;
+    width: 1em;
     border-radius: 50%;
     background-image: url(images/unchecked.png);
     background-size: cover;
     background-position: center;
-    top: 12px;
-    left: 8px;
 }
 
 ul li.checked{
@@ -179,17 +113,35 @@ ul li.checked::before{
     background-image: url(images/checked.png);
 }
 
-ul li span{
-    grid-column: 3;
-    text-align: end;
-}
-
 ul li span:hover{
     background: #edeef0;
 }
 
-ul li span.due-date{
-    grid-column: 2;
+.clear-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.5em;
+    background: transparent;
+    padding: 0.8em;
+}
+
+.top-button{
+    border: none;
+    outline: none;
+    padding: 0.3em;
+    background: gray;
+    color: white;
+    font-size: 0.8em;
+    cursor: pointer;
+    border-radius: 0.3em;
+}
+
+.top-buttons-container{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0.5em;
 }
 
 .switch{

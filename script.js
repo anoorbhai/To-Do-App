@@ -2,13 +2,16 @@ const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 const dueDate = document.getElementById("due-date");
 
-
 document.getElementById('theme-toggle').addEventListener('click', function() {
     var todoApp = document.querySelector('.todo-app');
+    var container = document.querySelector('.container');
+
     if (this.checked) {
         todoApp.classList.add('dark-mode');
+        container.classList.add('dark-mode');
     } else {
         todoApp.classList.remove('dark-mode');
+        container.classList.remove('dark-mode');
     }
 });
 
@@ -18,23 +21,22 @@ function addTask(boardNumber) {
     }
     else {
         let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
+        li.innerText = inputBox.value;
 
-        let dueDateSpan = document.createElement("span");
-        dueDateSpan.classList.add("due-date");
-        dueDateSpan.innerHTML = new Date(dueDate.value).toLocaleDateString();
-        li.appendChild(dueDateSpan);
+        let dueDateP = document.createElement("p");
+        dueDateP.classList.add("due-date");
+        dueDateP.innerText = new Date(dueDate.value).toLocaleDateString();
+        li.appendChild(dueDateP);
 
         listContainer.appendChild(li);
         let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
+        span.textContent = "\u00d7";
         li.appendChild(span);
     }
     inputBox.value = "";
     dueDate.value = "";
     saveData();
 }
-
 
 function sortTasks() {
     const tasks = Array.from(listContainer.children);
@@ -61,7 +63,7 @@ listContainer.addEventListener("click", function (e){
         e.target.classList.toggle("checked");
         saveData();
     }
-    else if (e.target.tagName === "SPAN" && e.target.innerHTML === "\u00d7") {
+    else if (e.target.innerHTML === "\u00d7") {
         e.target.parentElement.remove();
         saveData();
     }
@@ -69,7 +71,7 @@ listContainer.addEventListener("click", function (e){
 
 function deleteAllTasks() {
     if (window.confirm("Are you sure you want to delete all tasks?")) {
-        listContainer.innerHTML = "";
+        listContainer.innerText = "";
         localStorage.clear();
     }
 }
