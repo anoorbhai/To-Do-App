@@ -31,28 +31,39 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
     localStorage.setItem("theme", theme);
     }
 );
+    
+let tasks = [];
 
 function addTask() {
     if (inputBox.value === '' || dueDate.value === '') {
         document.getElementById("alertModal").style.display = "block";
     }
     else {
-        let li = document.createElement("li");
-        li.innerText = inputBox.value;
-
-        let dueDateP = document.createElement("small");
-        dueDateP.classList.add("due-date");
-        dueDateP.innerText = new Date(dueDate.value).toLocaleDateString();
-        li.appendChild(dueDateP);
-
-        listContainer.appendChild(li);
-        let span = document.createElement("span");
-        span.textContent = "\u00d7";
-        li.appendChild(span);
+        let task = {
+            text: inputBox.value,
+            dueDate: new Date(dueDate.value).toLocaleDateString()
+        };
+        tasks.push(task);
+        displayTask(task);
     }
     inputBox.value = "";
     dueDate.value = "";
     saveData();
+}
+    
+function displayTask(task) {
+    let li = document.createElement("li");
+    li.innerText = task.text;
+
+    let dueDateP = document.createElement("small");
+    dueDateP.classList.add("due-date");
+    dueDateP.innerText = task.dueDate;
+    li.appendChild(dueDateP);
+
+    listContainer.appendChild(li);
+    let span = document.createElement("span");
+    span.textContent = "\u00d7";
+    li.appendChild(span);
 }
 
 function sortTasks() {
@@ -112,12 +123,17 @@ function confirmClear() {
     });
 }
 
+    
 function saveData() {
-    localStorage.setItem("data", listContainer.innerHTML);
+    localStorage.setItem("data", JSON.stringify(tasks));
 }
 
 function showTask() {
-    listContainer.innerHTML = localStorage.getItem(`data`);
+    const savedTasks = JSON.parse(localStorage.getItem("data"));
+    if (savedTasks) {
+        tasks = savedTasks;
+        tasks.forEach(task => displayTask(task));
+    }
 
     const titleElement = document.querySelector(`.todo-app h2`);
     const savedTitle = localStorage.getItem(`boardTitle`);
