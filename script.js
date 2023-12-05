@@ -1,29 +1,47 @@
+try {
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 const dueDate = document.getElementById("due-date");
+const currentTheme = localStorage.getItem("theme");
+var todoApp = document.querySelector('.todo-app');
+var container = document.querySelector('.container');
+
+if (currentTheme === 'dark') {
+    todoApp.classList.add('dark-mode');
+    container.classList.add('dark-mode');
+    document.getElementById('theme-toggle').checked = true;
+}
+else {
+    todoApp.classList.remove('dark-mode');
+    container.classList.remove('dark-mode');
+    document.getElementById('theme-toggle').checked = false;
+}
 
 document.getElementById('theme-toggle').addEventListener('click', function() {
-    var todoApp = document.querySelector('.todo-app');
-    var container = document.querySelector('.container');
-
+    let theme = 'light';
     if (this.checked) {
         todoApp.classList.add('dark-mode');
         container.classList.add('dark-mode');
-    } else {
+        theme = 'dark';
+    }
+    else {
         todoApp.classList.remove('dark-mode');
         container.classList.remove('dark-mode');
     }
-});
+    localStorage.setItem("theme", theme);
+    }
+);
 
-function addTask(boardNumber) {
+function addTask() {
     if (inputBox.value === '' || dueDate.value === '') {
-        alert("Enter task and due date");
+        // alert("Enter task and due date");
+        document.getElementById("alertModal").style.display = "block";
     }
     else {
         let li = document.createElement("li");
         li.innerText = inputBox.value;
 
-        let dueDateP = document.createElement("p");
+        let dueDateP = document.createElement("small");
         dueDateP.classList.add("due-date");
         dueDateP.innerText = new Date(dueDate.value).toLocaleDateString();
         li.appendChild(dueDateP);
@@ -69,11 +87,30 @@ listContainer.addEventListener("click", function (e){
     }
 }, false);
 
-function deleteAllTasks() {
-    if (window.confirm("Are you sure you want to delete all tasks?")) {
-        listContainer.innerText = "";
-        localStorage.clear();
+window.onclick = function(event) {
+    var modal1 = document.getElementById("alertModal");
+    if (event.target === modal1) {
+        modal1.style.display = 'none';
     }
+
+    var modal2 = document.getElementById("clearModal");
+    if (event.target === modal2) {
+        modal2.style.display = 'none';
+    }
+}
+
+function confirmClear() {
+    document.getElementById("clearModal").style.display = "block";
+
+    document.getElementById("yesButton").addEventListener('click', function() {
+        listContainer.innerText = "";
+        localStorage.removeItem("data");
+        document.getElementById("clearModal").style.display = "none";
+    });
+
+    document.getElementById("noButton").addEventListener('click', function() {
+        document.getElementById("clearModal").style.display = "none";
+    });
 }
 
 function saveData() {
@@ -91,3 +128,9 @@ function showTask() {
 }
 
 showTask();
+
+}
+catch (error){
+    console.error("An error occurred: ", error);
+}
+

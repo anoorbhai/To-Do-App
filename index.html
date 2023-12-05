@@ -17,11 +17,17 @@
                 <h2 contenteditable="true" onblur="saveTitle(this)">Tasks</h2>
             </header>
             
-            <form class = "row">
+            <section class = "row">
                 <input type="text" id="input-box" placeholder="Add your text">
                 <input type="date" id="due-date" placeholder="Add due date">
                 <button onclick="addTask()">ADD</button>
-            </form>
+            </section>
+
+            <div id = "alertModal" class = "modal-container">
+                <div id = "alertModalContent" class="modal-content">
+                    Please Enter a Task and a due date!
+                </div>
+            </div>
 
             <div class = "top-buttons-container">
                 <button class = "top-button" onclick="sortTasks()">SORT BY DUE DATE</button>
@@ -31,8 +37,16 @@
             </ul>
 
             <div class = clear-button-container>
-                 <button class = "clear-button" onclick="deleteAllTasks()">CLEAR ALL</button>
+                 <button class = "clear-button" onclick="confirmClear()">CLEAR ALL</button>
             </div>
+
+            <div id = "clearModal" class = "modal-container">
+                <div id = "clearModalContent" class="modal-content">
+                    Are you sure you want to clear all content?
+                    <button id ="yesButton" class = "top-button">YES</button> <button id = "noButton" class = "top-button">NO</button>
+                </div>
+            </div>
+
         </section>
         
         <label class="switch">
